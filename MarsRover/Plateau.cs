@@ -84,5 +84,43 @@ namespace MarsRover
                     break;
             }
         }
+
+        public void Right()
+        {
+            switch (this.GetDirection())
+            {
+                case "N":
+                    this.SetDirection("E");
+                    break;
+                case "E":
+                    this.SetDirection("S");
+                    break;
+                case "S":
+                    this.SetDirection("W");
+                    break;
+                case "W":
+                    this.SetDirection("N");
+                    break;
+            }
+        }
+
+        public void Left()
+        {
+            switch (this.GetDirection())
+            {
+                case "N":
+                    this.SetDirection("W");
+                    break;
+                case "E":
+                    this.SetDirection("N");
+                    break;
+                case "S":
+                    this.SetDirection("E");
+                    break;
+                case "W":
+                    this.SetDirection("S");
+                    break;
+            }
+        }
     }
 }

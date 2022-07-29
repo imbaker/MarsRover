@@ -193,5 +193,41 @@ namespace MarsRover.Tests
             Assert.That(plateau.GetPosition().x, Is.EqualTo(expectedX));
             Assert.That(plateau.GetPosition().y, Is.EqualTo(expectedY));
         }
+
+        [Test]
+        [TestCase("N", ExpectedResult = "E")]
+        [TestCase("E", ExpectedResult = "S")]
+        [TestCase("S", ExpectedResult = "W")]
+        [TestCase("W", ExpectedResult = "N")]
+        public string Plateau_ShouldIncrementOrientation_WhenRight(string orientation)
+        {
+            // Arrange
+            var plateau = new Plateau(10, 20);
+            plateau.SetPosition(1, 3);
+            plateau.SetDirection(orientation);
+
+            // Act
+            plateau.Right();
+
+            return plateau.GetDirection();
+        }
+
+        [Test]
+        [TestCase("N", ExpectedResult = "W")]
+        [TestCase("E", ExpectedResult = "N")]
+        [TestCase("S", ExpectedResult = "E")]
+        [TestCase("W", ExpectedResult = "S")]
+        public string Plateau_ShouldDecrementOrientation_WhenRight(string orientation)
+        {
+            // Arrange
+            var plateau = new Plateau(10, 20);
+            plateau.SetPosition(1, 3);
+            plateau.SetDirection(orientation);
+
+            // Act
+            plateau.Left();
+
+            return plateau.GetDirection();
+        }
     }
 }
