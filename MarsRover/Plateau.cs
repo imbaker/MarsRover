@@ -10,7 +10,15 @@ namespace MarsRover
     {
         private int currentX;
         private int currentY;
-        private string heading;
+        private Orientation orientation;
+
+        public enum Orientation : byte
+        {
+            North = 0,
+            East = 1,
+            South = 2,
+            West = 3
+        }
 
         public Plateau(int x, int y)
         {
@@ -32,14 +40,22 @@ namespace MarsRover
             return (currentX, currentY);
         }
 
-        public void SetDirection(string heading)
+        public void SetDirection(Orientation orientation)
         {
-            this.heading = heading;
+            var x = (int) orientation;
+            var min = Enum.GetValues<Orientation>().Cast<byte>().Min();
+            var max = Enum.GetValues<Orientation>().Cast<byte>().Max();
+            if (x == byte.MaxValue)
+                this.orientation = Orientation.West;
+            else  if (x > max) 
+                this.orientation = Orientation.North;
+            else
+                this.orientation = orientation;
         }
 
-        public string GetDirection()
+        public Orientation GetDirection()
         {
-            return this.heading;
+            return this.orientation;
         }
 
         public void MoveNorth()
@@ -70,16 +86,16 @@ namespace MarsRover
         {
             switch (this.GetDirection())
             {
-                case "N":
+                case Orientation.North:
                     this.MoveNorth();
                     break;
-                case "E":
+                case Orientation.East:
                     this.MoveEast();
                     break;
-                case "S":
+                case Orientation.South:
                     this.MoveSouth();
                     break;
-                case "W":
+                case Orientation.West:
                     this.MoveWest();
                     break;
             }
@@ -87,40 +103,14 @@ namespace MarsRover
 
         public void Right()
         {
-            switch (this.GetDirection())
-            {
-                case "N":
-                    this.SetDirection("E");
-                    break;
-                case "E":
-                    this.SetDirection("S");
-                    break;
-                case "S":
-                    this.SetDirection("W");
-                    break;
-                case "W":
-                    this.SetDirection("N");
-                    break;
-            }
+            var orientation = this.GetDirection();
+            this.SetDirection(orientation+1);
         }
 
         public void Left()
         {
-            switch (this.GetDirection())
-            {
-                case "N":
-                    this.SetDirection("W");
-                    break;
-                case "E":
-                    this.SetDirection("N");
-                    break;
-                case "S":
-                    this.SetDirection("E");
-                    break;
-                case "W":
-                    this.SetDirection("S");
-                    break;
-            }
+            var orientation = this.GetDirection();
+            this.SetDirection(orientation-1);
         }
     }
 }

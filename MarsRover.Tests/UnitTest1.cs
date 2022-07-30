@@ -157,11 +157,11 @@ namespace MarsRover.Tests
         }
 
         [Test]
-        [TestCase("N", ExpectedResult = "N")]
-        [TestCase("E", ExpectedResult = "E")]
-        [TestCase("S", ExpectedResult = "S")]
-        [TestCase("W", ExpectedResult = "W")]
-        public string Plateau_ShouldUpdateCurrentDirection_WhenDirectionSet(string orientation)
+        [TestCase(Plateau.Orientation.North, ExpectedResult = Plateau.Orientation.North)]
+        [TestCase(Plateau.Orientation.East, ExpectedResult = Plateau.Orientation.East)]
+        [TestCase(Plateau.Orientation.South, ExpectedResult = Plateau.Orientation.South)]
+        [TestCase(Plateau.Orientation.West, ExpectedResult = Plateau.Orientation.West)]
+        public Plateau.Orientation Plateau_ShouldUpdateCurrentDirection_WhenDirectionSet(Plateau.Orientation orientation)
         {
             // Arrange
             var plateau = new Plateau(10, 20);
@@ -175,11 +175,11 @@ namespace MarsRover.Tests
         }
 
         [Test]
-        [TestCase(1, 3, "N", 1, 4)]
-        [TestCase(1, 3, "E", 2, 3)]
-        [TestCase(1, 3, "S", 1, 2)]
-        [TestCase(1, 3, "W", 0, 3)]
-        public void Plateau_ShouldMoveInTheRightDirection_WhenDirectionSet(int startX, int startY, string orientation, int expectedX, int expectedY)
+        [TestCase(1, 3, Plateau.Orientation.North, 1, 4)]
+        [TestCase(1, 3, Plateau.Orientation.East, 2, 3)]
+        [TestCase(1, 3, Plateau.Orientation.South, 1, 2)]
+        [TestCase(1, 3, Plateau.Orientation.West, 0, 3)]
+        public void Plateau_ShouldMoveInTheRightDirection_WhenDirectionSet(int startX, int startY, Plateau.Orientation orientation, int expectedX, int expectedY)
         {
             // Arrange
             var plateau = new Plateau(10, 20);
@@ -195,11 +195,11 @@ namespace MarsRover.Tests
         }
 
         [Test]
-        [TestCase("N", ExpectedResult = "E")]
-        [TestCase("E", ExpectedResult = "S")]
-        [TestCase("S", ExpectedResult = "W")]
-        [TestCase("W", ExpectedResult = "N")]
-        public string Plateau_ShouldIncrementOrientation_WhenRight(string orientation)
+        [TestCase(Plateau.Orientation.North, ExpectedResult = Plateau.Orientation.East)]
+        [TestCase(Plateau.Orientation.East, ExpectedResult = Plateau.Orientation.South)]
+        [TestCase(Plateau.Orientation.South, ExpectedResult = Plateau.Orientation.West)]
+        [TestCase(Plateau.Orientation.West, ExpectedResult = Plateau.Orientation.North)]
+        public Plateau.Orientation Plateau_ShouldIncrementOrientation_WhenRight(Plateau.Orientation orientation)
         {
             // Arrange
             var plateau = new Plateau(10, 20);
@@ -213,11 +213,11 @@ namespace MarsRover.Tests
         }
 
         [Test]
-        [TestCase("N", ExpectedResult = "W")]
-        [TestCase("E", ExpectedResult = "N")]
-        [TestCase("S", ExpectedResult = "E")]
-        [TestCase("W", ExpectedResult = "S")]
-        public string Plateau_ShouldDecrementOrientation_WhenRight(string orientation)
+        [TestCase(Plateau.Orientation.North, ExpectedResult = Plateau.Orientation.West)]
+        [TestCase(Plateau.Orientation.East, ExpectedResult = Plateau.Orientation.North)]
+        [TestCase(Plateau.Orientation.South, ExpectedResult = Plateau.Orientation.East)]
+        [TestCase(Plateau.Orientation.West, ExpectedResult = Plateau.Orientation.South)]
+        public Plateau.Orientation Plateau_ShouldDecrementOrientation_WhenRight(Plateau.Orientation orientation)
         {
             // Arrange
             var plateau = new Plateau(10, 20);
